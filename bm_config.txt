@@ -1,0 +1,7 @@
+browninan coefficients: 1.0,2.0,-4.0,1.0
+startingpoints:1.0,1.0,1.0,1.0
+ar1 const terms:0.0,0.0,0.0,0.0
+ar1 phi coeff:0.8,0.5,0.7,0.8
+ar1 err sigma:1.0,1.0,1.0,1.0
+brownian sigma: 0.5
+num points: 390 
