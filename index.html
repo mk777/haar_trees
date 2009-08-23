@@ -91,14 +91,14 @@
       </p>
       <h3>Results</h3>
       <p>
-        For the first attempt at using the developed Haar tree representation I have chosen the problem 
-	of estimating cointegration relations between a set of time series. My suggested solution is based
-	on a simple idea: the vectors whose components are the Haar wavelet 
-	coefficients of each of the time series over the same time subintervals are considered to be 
-	noisy samples of the true coinegration realion. (For simplisity I assume there is only one 
-	relation for now.) After taking care of scaling, (which is not entirely straightforward) one 
-	takes averages of vectors corresponding to the like levels of the Haar trees to get an 
-	estimate of the vector of cointegration realtions. 
+        The first application of the developed Haar tree representation is to the estimation of the 
+	vector of cointegration relations for a set of time series. For simplicity, I assume there is
+	only one cointegration relation for now. The idea is straightforward:
+	construct the Haar tree for each of the series, make vectors out of the coefficients at the
+	same positions in the trees (a vector of roots, a vector of leftmost children of roots, etc.),
+	consider the <em> directions</em> of these vectors to be noisy estimates of the <em>direction</em>
+	of the cointegration realtions vector. Averaging the vectors in a sensible way produces the 
+	estimate of the cointegration relations. 
       </p>
 
     <h2>Download</h2>
