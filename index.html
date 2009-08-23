@@ -66,10 +66,17 @@
 	When computing the 
 	<a href="http://en.wikipedia.org/wiki/Haar_wavelet"> Haar wavelet</a> 
 	coeffficients, one essentially runs a recursive procedure,
-	where each step consists of computing the differences between the average values of a
-	function on the left and the right halfs of an interval for a set of intevals, storing 
-	the results, and bisecting the original intervals before passing them as input to a 
-	recursive call. So, fundamentally, the Haar wavelet coefficients are not just a set of numbers,
+	where each step consists of 
+	<ul>
+	  <li>computing the differences between the average values of a
+	  function on the left and the right halfs of an interval for a set of intevals,
+	  </li> 
+	  <li> storing the differences </li>
+	  <li> bisecting the original intervals before passing them as input to a 
+	  recursive call.
+	  </li>
+	</ul>
+	  So, fundamentally, the Haar wavelet coefficients are not just a set of numbers,
 	but could be seen as the values at the nodes of a binary tree. While not terribly useful 
 	by itself, this observation suggests a representation of the graph of the function which
 	has enough structure to allow for a quick assesment of the overall shape, perhaps similar 
@@ -97,7 +104,7 @@
 	construct the Haar tree for each of the series, make vectors out of the coefficients at the
 	same positions in the trees (a vector of roots, a vector of leftmost children of roots, etc.),
 	consider the <em> directions</em> of these vectors to be noisy estimates of the <em>direction</em>
-	of the cointegration realtions vector. Averaging the vectors in a sensible way produces the 
+	of the cointegration realtions vector. Averaging the vectors in a sensible way produces an 
 	estimate of the cointegration relations. 
       </p>
 
