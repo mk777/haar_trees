@@ -45,12 +45,61 @@
         <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
     </div>
       
-    <h1><a href="http://github.com/mk777/haar_trees">haar_trees</a> 
+    <h1><a href="http://github.com/mk777/haar_trees">Haar trees</a> 
       <span class="small">by <a href="http://github.com/mk777">mk777</a></span></h1>
 
     <div class="description">
-      An experimental project to explore the use of tree-based representation of Haar wavelet coefficients for a time series.
+      An experimental project to explore the use of tree-based representation of 
+      Haar wavelet coefficients for a time series.
     </div>
+
+    <h2>Project description</h2>
+      <h3>Motivation</h3>
+      <p>
+	I have had the idea of using a structured numerical representation of a two-dimensional 
+	graph of a function, such as a time series, for some time now. When I decided to 
+	try out OCaml, this project looked like the right testing ground. Naturally, the code is 
+	amaturish, but the project gave me a chance to explore several language features in a fairly 
+	realistic setting, so I think it was quite useful overall.
+      </p>
+      <p>
+	When computing the 
+	<a href="http://en.wikipedia.org/wiki/Haar_wavelet"> Haar wavelet</a> 
+	coeffficients, one essentially runs a recursive procedure,
+	where each step consists of computing the differences between the average values of a
+	function on the left and the right halfs of an interval for a set of intevals, storing 
+	the results, and bisecting the original intervals before passing them as input to a 
+	recursive call. So, fundamentally, the Haar wavelet coefficients are not just a set of numbers,
+	but could be seen as the values at the nodes of a binary tree. While not terribly useful 
+	by itself, this observation suggests a representation of the graph of the function which
+	has enough structure to allow for a quick assesment of the overall shape, perhaps similar 
+	to the one a reasonably educated human being would make upon being shown a graph of a function.
+	This tree immediately shows if the function has a general trend, how volatile it is on a variety of scales, 
+	what is the overall dynamics as the argument varies from left to right along the x-axis, etc. 
+	Even more importanly, it might eventually lead to a simple approach to recognizing 
+	patterns in the shape of the graph, or its parts, which would produce results similar 
+	to the ones of human observers.   		 
+      </p>
+      <p>
+	
+      </p>
+      <h3>The basic approach</h3>
+      <p>
+      </p>
+      <h3>Notes on implementation</h3>
+      <p>
+      </p>
+      <h3>Results</h3>
+      <p>
+        For the first attempt at using the developed Haar tree representation I have chosen the problem 
+	of estimating cointegration relations between a set of time series. My suggested solution is based
+	on a simple idea: the vectors whose components are the Haar wavelet 
+	coefficients of each of the time series over the same time subintervals are considered to be 
+	noisy samples of the true coinegration realion. (For simplisity I assume there is only one 
+	relation for now.) After taking care of scaling, (which is not entirely straightforward) one 
+	takes averages of vectors corresponding to the like levels of the Haar trees to get an 
+	estimate of the vector of cointegration realtions. 
+      </p>
 
     <h2>Download</h2>
     <p>
