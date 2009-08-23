@@ -35,7 +35,6 @@ def print_stats(avg,stdev):
 
 if __name__ == "__main__":
     filename=sys.argv[1]
-    print filename
     d=read_data(filename)
     avg=result_avg(d)
     stdev=result_std_div(d,avg)

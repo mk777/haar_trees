@@ -179,6 +179,12 @@ let print_coint_rel vect_lst =
 (* read the data *) 
 let data = read_input();;
 let data_vecs = List.map Array.of_list data;;
+(*check the reverse oprion *)
+let rev = ref false;;
+
+let opt_list = [("-r",Arg.Set rev,"reverse the list of Haar tree levels")] 
+and usage_msg = "option -r results in reversing the list of Haar tree levels"
+in Arg.parse opt_list (fun s-> ()) usage_msg;;
 
 (* make generalized Haar trees for the data *)
 let data_trees = List.map Haar.gen_haar_recomb data_vecs;;
@@ -193,5 +199,5 @@ let diff_lists = List.map (Tree.breadth_first_map recomb_node_to_diff 0.0)
 let vectors = List.map transpose_list (transpose_list diff_lists);;
 (*print_list_of_lists vectors;; *)
 
-print_coint_rel (List.rev vectors);;
+print_coint_rel (if (!rev) then List.rev vectors else vectors);;
 print_newline();;
