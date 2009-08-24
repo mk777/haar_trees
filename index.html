@@ -117,6 +117,27 @@
 	structured representation, it seems reasonable to include this extra information, since 
 	it allows for a more uniform approach to the analysis and comparison of the subtrees.	
       </p>
+      <h3>Applications and results</h3>
+      <p>
+        The first application of the developed Haar tree representation is to the estimation of the 
+	vector of cointegration relations for a set of time series (haar_coint.ml). For simplicity, I assume there is
+	only one cointegration relation for now. The idea is straightforward:
+	construct the Haar tree for each of the series, make vectors out of the coefficients at the
+	same positions in the trees (a vector of roots, a vector of leftmost children of roots, etc.),
+	consider the <em> directions</em> of these vectors to be noisy estimates of the <em>direction</em>
+	of the cointegration realtions vector. Averaging the vectors in a sensible way produces an 
+	estimate of the cointegration relations. 
+      </p>
+      <p>
+        Running 
+	<pre>$ ./coint_rel_results.sh N </pre>
+	will result in running a cycle of N steps of estimating the cointegration relations between the time
+	series generated according to the bm_config.txt using a different number of tree levels: first from 
+	just the root level down to the full tree worth of levels, and then in reverse starting with just the 
+	leaves, and then up to all of the levels including the root. The first component is normalized to 1.0.
+	The mean and std div of each of the components over the N estimations are computed and printed out.
+      </p>
+
       <h3>Notes on the implementation</h3>
       <p>
         The Tree and Haar modules were implemented with a reasonable degree of care, so they probably 
@@ -129,16 +150,11 @@
         for the vectors composed of the like tree nodes that give the noisy cointegration vector 
 	direction samples. 
       </p>
-      <h3>Applications and results</h3>
       <p>
-        The first application of the developed Haar tree representation is to the estimation of the 
-	vector of cointegration relations for a set of time series (haar_coint.ml). For simplicity, I assume there is
-	only one cointegration relation for now. The idea is straightforward:
-	construct the Haar tree for each of the series, make vectors out of the coefficients at the
-	same positions in the trees (a vector of roots, a vector of leftmost children of roots, etc.),
-	consider the <em> directions</em> of these vectors to be noisy estimates of the <em>direction</em>
-	of the cointegration realtions vector. Averaging the vectors in a sensible way produces an 
-	estimate of the cointegration relations. 
+        Also it would probably be better not to normalize the first component in the cointegration 
+	relations estimates, but use the vectors of unit norm, and base the dispersion estimate on 
+	the average values of the angles between consecutive estimates or some other measure of 
+	the dispersion of the unit vectors on the sphere.   
       </p>
 
     <h2>Download</h2>
