@@ -54,6 +54,10 @@
     </div>
 
     <h2>Project description</h2>
+      <p><i> Both this page and the project are in a constant state of flux. A reasonable effort will be made
+      to keep the page consistent with the code, but at any given time it may be stale and not 
+      represent adequately the most recent developments. Apologies in advance for whenever that happens.
+      </i></p>
       <h3>Motivation</h3>
       <p>
 	I have had the idea of using a structured numerical representation of a two-dimensional 
@@ -78,11 +82,11 @@
 	</ul>
 	  So, fundamentally, the Haar wavelet coefficients are not just a set of numbers,
 	but could be seen as the values at the nodes of a binary tree. While not terribly useful 
-	by itself, this observation suggests a representation of the graph of the function which
+	by itself, this observation suggests a representation of the graph of a function which
 	has enough structure to allow for a quick assesment of the overall shape, perhaps similar 
-	to the one a reasonably educated human being would make upon being shown a graph of a function.
+	to the one a reasonably educated human being would make upon being shown a graph.
 	This tree immediately shows if the function has a general trend, how volatile it is on a variety of scales, 
-	what is the overall dynamics as the argument varies from left to right along the x-axis, etc. 
+	what are the overall dynamics as the argument varies from left to right along the x-axis, etc. 
 	Even more importanly, it might eventually lead to a simple approach to recognizing 
 	patterns in the shape of the graph, or its parts, which would produce results similar 
 	to the ones of human observers.   		 
@@ -92,14 +96,43 @@
       </p>
       <h3>The basic approach</h3>
       <p>
+	Several changes to the standard Haar wavelet transform were made. First, when the number of 
+	points in the time series is not a power of 2, the standard technique breaks down. There are 
+	several possible ways to extend the framework beyond this case, none without flaws. The one that was chosen
+	here constructs the tree from the root, subdividing current intervals in two at each step, 
+	including the midpoint into both, when the current interval has odd length.          
       </p>
-      <h3>Notes on implementation</h3>
       <p>
+        Second, the tree we use is deliberately made redundant: original Haar wavelet transform only uses 
+	half of the differences between the averages over the subintervals. For instance, it would 
+	calculate the difference between the averages of 2nd and 1st, and 4th and 3rd subintervals, 
+	but not between the 3rd and 2nd. The differences that are left out may be recovered from the 
+	ones at the higher scales. The Haar trees constructed here include the nodes corresponding 
+	to the differences between all of the neighboring subintervals at every scale. Note, that the choice
+	made to adapt the construction to series of arbitrary length in particular leads to having 
+	a number of 0 nodes at the highest resolution (the level of the tree leaves).
+      </p>
+      <p>
+        The redundancy mentioned above is deliberate. Since the overall aim is a convenient 
+	structured representation, it seems reasonable to include this extra information, since 
+	it allows for a more uniform approach to the analysis and comparison of the trees.	
+      </p>
+      <h3>Notes on the implementation</h3>
+      <p>
+        The Tree and Haar modules were implemented with a reasonable degree of care, so they probably 
+	could be used in their present form, although I am sure some improvements can be made. 
+	The Tree module in particular could have more of the analogues of the functions in List, 
+	I have only implemented what was needed so far.
+      </p>
+      <p>
+        Haar_coint is much more of a hack. The most obvious improvement would be to use float arrays 
+        for the vectors composed of the like tree nodes that give the noisy cointegration vector 
+	direction samples. 
       </p>
       <h3>Results</h3>
       <p>
         The first application of the developed Haar tree representation is to the estimation of the 
-	vector of cointegration relations for a set of time series. For simplicity, I assume there is
+	vector of cointegration relations for a set of time series (haar_coint.ml). For simplicity, I assume there is
 	only one cointegration relation for now. The idea is straightforward:
 	construct the Haar tree for each of the series, make vectors out of the coefficients at the
 	same positions in the trees (a vector of roots, a vector of leftmost children of roots, etc.),
