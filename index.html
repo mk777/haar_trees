@@ -97,10 +97,10 @@
       <h3>The basic approach</h3>
       <p>
 	Several changes to the standard Haar wavelet transform were made. First, when the number of 
-	points in the time series is not a power of 2, the standard technique breaks down. There are 
-	several possible ways to extend the framework beyond this case, none without flaws. The one that was chosen
-	here constructs the tree from the root, subdividing current intervals in two at each step, 
-	including the midpoint into both, when the current interval has odd length.          
+	points in the time series is not a power of 2, the standard technique breaks down. I have come up with 
+	several possible ways to extend the framework beyond this case, none without flaws. In the one that was chosen
+	here the tree is built from the root, subdividing current intervals in two at each step, 
+	including the midpoint into both subintervals, when the current interval has odd length.          
       </p>
       <p>
         Second, the tree we use is deliberately made redundant: original Haar wavelet transform only uses 
@@ -109,13 +109,13 @@
 	but not between the 3rd and 2nd. The differences that are left out may be recovered from the 
 	ones at the higher scales. The Haar trees constructed here include the nodes corresponding 
 	to the differences between all of the neighboring subintervals at every scale. Note, that the choice
-	made to adapt the construction to series of arbitrary length in particular leads to having 
+	made to adapt the construction to a series of arbitrary length among other things leads to having 
 	a number of 0 nodes at the highest resolution (the level of the tree leaves).
       </p>
       <p>
         The redundancy mentioned above is deliberate. Since the overall aim is a convenient 
 	structured representation, it seems reasonable to include this extra information, since 
-	it allows for a more uniform approach to the analysis and comparison of the trees.	
+	it allows for a more uniform approach to the analysis and comparison of the subtrees.	
       </p>
       <h3>Notes on the implementation</h3>
       <p>
